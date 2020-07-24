@@ -9,7 +9,7 @@
 	</head> 
 <body> 
 
-	<div><?php include('navBar.php'); ?></div>
+	<div><?php include('navbar.php'); ?></div>
 	
 	
 	<div class ="contact-div">
@@ -28,7 +28,7 @@
 
 
 				$result = mysqli_query($conn,"SELECT created_at,email FROM newsletter");
-				while ($row = mysqli_fetch_array($result, MYSQL_NUM)) {
+                while ($row = $result->fetch_array(MYSQLI_NUM)) {
 					printf('<tr bgcolor="#C0C0C0"><td>' .$row[0].'</td><td>'. $row[1].'</td>');
 					echo '</tr>';
 				}

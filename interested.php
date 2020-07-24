@@ -9,7 +9,7 @@
 	</head> 
 <body> 
 
-	<div><?php include('navBar.php'); ?></div>
+	<div><?php include('navbar.php'); ?></div>
 	
 	
 	<div class ="contact-div">
@@ -28,7 +28,7 @@
 
 
 				$result = mysqli_query($conn,"SELECT created_at,name,lastname,email,phone,agree FROM interested");
-				while ($row = mysqli_fetch_array($result, MYSQL_NUM)) {
+                while ($row = $result->fetch_array(MYSQLI_NUM)) {
 					if ($row[5]==1){
 						$row[5]="Oui";
 						}
