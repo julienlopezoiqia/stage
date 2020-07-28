@@ -44,7 +44,7 @@
 
 
 					$result = mysqli_query($conn,"SELECT created_at,name,lastname,email,phone,agree FROM interested");
-					while ($row = $result-> fetch_array( MYSQL_NUM)) {
+					while ($row = $result-> fetch_array( MYSQLI_NUM)) {
 						if ($row[5]==1){
 							$row[5]="Oui";
 						}
