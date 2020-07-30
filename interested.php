@@ -13,6 +13,8 @@
 
 	<div><?php include('navbar.php'); ?></div>
 	
+	<form  method="post" action="interested.php"><?php include('dates.php'); ?></form>
+	
 	
 	<div class ="container">
 	<br>
@@ -37,30 +39,36 @@
 					
 					include 'CoBdd.php';
 
-					$conn = OpenCon();
 
-				
+					if( isset($_POST["Debut"])and isset($_POST["Fin"])){
+						$conn = OpenCon();
+						$debut = $_POST["Debut"];
+						$fin = $_POST["Fin"];
+						
+						$date_debut = '\''.$debut.'\'';
+						$date_fin = '\''.$fin.'\'';
+						$request = "SELECT created_at,name,lastname,email,phone,agree FROM interested WHERE created_at BETWEEN date_format(".$date_debut.",'%Y-%m-%d') AND date_format(".$date_fin.",'%Y-%m-%d') ORDER BY created_at DESC ";
+						
+						$result = mysqli_query($conn,$request);
 
-
-
-					$result = mysqli_query($conn,"SELECT created_at,name,lastname,email,phone,agree FROM interested");
-					while ($row = $result-> fetch_array( MYSQLI_NUM)) {
-						if ($row[5]==1){
-							$row[5]="Oui";
-						}
-						else{
-							$row[5]="Non";
-						}
+						while ($row = $result-> fetch_array( MYSQL_NUM)) {
+							if ($row[5]==1){
+								$row[5]="Oui";
+							}
+							else{
+								$row[5]="Non";
+							}
 					
-						printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[1].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
-						echo '</tr>';
-					}
+							printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[1].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
+							echo '</tr>';
+						}
 
 		
 		
  
 
-				CloseCon($conn);
+						CloseCon($conn);
+					}
 				?>
 			</tbody>
 		</table>

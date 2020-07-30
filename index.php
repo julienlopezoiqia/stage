@@ -12,6 +12,9 @@
 
 	<div><?php include('navbar.php'); ?></div>
 	
+	<form  method="post" action="index.php"><?php include('dates.php'); ?></form>
+	
+	
 	
 	<div class ="container">
 	<br>
@@ -36,27 +39,36 @@
 				<?php
 				
 					include 'CoBdd.php';
-
-					$conn = OpenCon();
-
 				
+					
+					if( isset($_POST["Debut"])and isset($_POST["Fin"])){
+						$conn = OpenCon();
+						$debut = $_POST["Debut"];
+						$fin = $_POST["Fin"];
+						
+						$date_debut = '\''.$debut.'\'';
+						$date_fin = '\''.$fin.'\'';
+						$request = "SELECT created_at,email,nom,prenom,telephone,message FROM contact_form WHERE created_at BETWEEN date_format(".$date_debut.",'%Y-%m-%d') AND date_format(".$date_fin.",'%Y-%m-%d') ORDER BY created_at DESC ";
+						
+						$result = mysqli_query($conn,$request);
+						while ($row = $result -> fetch_array( MYSQL_NUM)) {
+							printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[1].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
+							echo '</tr>';
+						}
 
 
-
-					$result = mysqli_query($conn,"SELECT created_at,email,nom,prenom,telephone,message FROM contact_form");
-					while ($row = $result -> fetch_array( MYSQLI_NUM)) {
-						printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[1].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
-						echo '</tr>';
+						CloseCon($conn);
+					
 					}
-
-		
-		
- 
-
-					CloseCon($conn);
+					
+					
 				?>
+				
 			</tbody>
 		</table>
 	</div>
+	
+	
+	
 </body>
 </html>

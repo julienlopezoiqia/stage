@@ -13,6 +13,13 @@
 <body> 
 
 	<div><?php include('navbar.php'); ?></div>
+	<form  method="post" action="newsletter.php"><?php include('dates.php'); ?></form>
+	
+	<form id="XLS" align="right" action="ExportXLS.php" method="POST">
+		
+		<input id="create_excel" type="submit" class="btn btn-info" value="Export to Excel"/>
+		
+	</form>
 	
 	
 	<div class ="container">
@@ -33,24 +40,25 @@
 	
 					include 'CoBdd.php';
 
-					$conn = OpenCon();
+					if( isset($_POST["Debut"])and isset($_POST["Fin"])){
+						$conn = OpenCon();
+						$debut = $_POST["Debut"];
+						$fin = $_POST["Fin"];
+						
+						$date_debut = '\''.$debut.'\'';
+						$date_fin = '\''.$fin.'\'';
+						$request = "SELECT created_at,email FROM newsletter WHERE created_at BETWEEN date_format(".$date_debut.",'%Y-%m-%d') AND date_format(".$date_fin.",'%Y-%m-%d') ORDER BY created_at DESC ";
+						
+						$result = mysqli_query($conn,$request);
+						while ($row = $result-> fetch_array(MYSQL_NUM)) {
+							printf('<tr bgcolor="#C0C0C0"><td>' .$row[0].'</td><td>'. $row[1].'</td>');
+							echo '</tr>';
+						}
 
-				
 
-
-
-					$result = mysqli_query($conn,"SELECT created_at,email FROM newsletter");
-					while ($row = $result-> fetch_array(MYSQLI_NUM)) {
-						printf('<tr bgcolor="#C0C0C0"><td>' .$row[0].'</td><td>'. $row[1].'</td>');
-						echo '</tr>';
+						CloseCon($conn);
 					}
-
-		
-		
- 
-
-				CloseCon($conn);
-			?>
+				?>
 			</tbody>
 		</table>
 	</div>
