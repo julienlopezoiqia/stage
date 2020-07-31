@@ -13,7 +13,7 @@
 <body> 
 	
 	
-	<div><?php include('navBar.php'); ?></div>
+	<div><?php include('navbar.php'); ?></div>
 	<form  method="post" action="formulaire.php"><?php include('dates.php'); ?></form>
 	
 	
@@ -58,7 +58,7 @@
 			
 			<tbody>
 				<?php
-					include 'CoBdd.php';
+					include 'Cobdd.php';
 					
 					
 					

@@ -63,10 +63,27 @@
 							echo '</tr>';
 						}
 
-		
-		
- 
 
+						CloseCon($conn);
+					}
+					else
+					{
+						$conn = OpenCon();
+						$request = "SELECT created_at,name,lastname,email,phone,agree FROM interested ORDER BY created_at DESC ";
+						
+						$result = mysqli_query($conn,$request);
+
+						while ($row = $result-> fetch_array( MYSQL_NUM)) {
+							if ($row[5]==1){
+								$row[5]="Oui";
+							}
+							else{
+								$row[5]="Non";
+							}
+					
+							printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[1].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
+							echo '</tr>';
+						}
 						CloseCon($conn);
 					}
 				?>

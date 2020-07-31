@@ -58,6 +58,21 @@
 
 						CloseCon($conn);
 					}
+					else{
+						$conn = OpenCon();
+						
+						$request = "SELECT created_at,email FROM newsletter WHERE created_at ORDER BY created_at DESC ";
+						
+						$result = mysqli_query($conn,$request);
+						while ($row = $result-> fetch_array(MYSQL_NUM)) {
+							printf('<tr bgcolor="#C0C0C0"><td>' .$row[0].'</td><td>'. $row[1].'</td>');
+							echo '</tr>';
+						}
+
+
+						CloseCon($conn);
+						
+					}
 				?>
 			</tbody>
 		</table>
