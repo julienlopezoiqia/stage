@@ -4,8 +4,8 @@
 		<title>Newsletter</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		
+		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 	</head> 
 	
@@ -50,7 +50,7 @@
 						$request = "SELECT created_at,email FROM newsletter WHERE created_at BETWEEN date_format(".$date_debut.",'%Y-%m-%d') AND date_format(".$date_fin.",'%Y-%m-%d') ORDER BY created_at DESC ";
 						
 						$result = mysqli_query($conn,$request);
-						while ($row = $result-> fetch_array(MYSQL_NUM)) {
+						while ($row = $result-> fetch_array(MYSQLI_NUM)) {
 							printf('<tr bgcolor="#C0C0C0"><td>' .$row[0].'</td><td>'. $row[1].'</td>');
 							echo '</tr>';
 						}
@@ -64,7 +64,7 @@
 						$request = "SELECT created_at,email FROM newsletter WHERE created_at ORDER BY created_at DESC ";
 						
 						$result = mysqli_query($conn,$request);
-						while ($row = $result-> fetch_array(MYSQL_NUM)) {
+						while ($row = $result-> fetch_array(MYSQLI_NUM)) {
 							printf('<tr bgcolor="#C0C0C0"><td>' .$row[0].'</td><td>'. $row[1].'</td>');
 							echo '</tr>';
 						}

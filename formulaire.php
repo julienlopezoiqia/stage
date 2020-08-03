@@ -4,7 +4,7 @@
 		<title>Formulaire</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">	
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		
 	</head> 
@@ -58,12 +58,13 @@
 			
 			<tbody>
 				<?php
-					include 'Cobdd.php';
+					include 'CoBdd.php';
 					
 					
 					
 					if( isset($_POST["Debut"])and isset($_POST["Fin"])){
 						$conn = OpenCon();
+						$conn->set_charset('utf8');
 						$debut = $_POST["Debut"];
 						$fin = $_POST["Fin"];
 						
@@ -101,6 +102,7 @@
 					}
 					else{
 						$conn = OpenCon();
+						$conn->set_charset('utf8');
 						$request = "SELECT nom, prenom ,adresse, email,telephone, appartement,numero,rue,code_postal,ville,type_logement,surface,chauffage,climatisation,access,porte,type_location,type_connexion,parking,nuit_par_an,nombre_couchage,duree_moyenne,chiffre_affaire,created_at,actutarif FROM formulaire ORDER BY created_at DESC ";
 						
 						$result = mysqli_query($conn,$request);

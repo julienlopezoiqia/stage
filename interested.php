@@ -4,8 +4,7 @@
 		<title>Interested</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 	</head> 
 	
@@ -51,7 +50,7 @@
 						
 						$result = mysqli_query($conn,$request);
 
-						while ($row = $result-> fetch_array( MYSQL_NUM)) {
+						while ($row = $result-> fetch_array( MYSQLI_NUM)) {
 							if ($row[5]==1){
 								$row[5]="Oui";
 							}
@@ -73,7 +72,7 @@
 						
 						$result = mysqli_query($conn,$request);
 
-						while ($row = $result-> fetch_array( MYSQL_NUM)) {
+						while ($row = $result-> fetch_array( MYSQLI_NUM)) {
 							if ($row[5]==1){
 								$row[5]="Oui";
 							}

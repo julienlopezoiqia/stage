@@ -4,7 +4,7 @@
 		<title>Contacts</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		
 	</head> 
@@ -43,6 +43,7 @@
 					
 					if( isset($_POST["Debut"])and isset($_POST["Fin"])){
 						$conn = OpenCon();
+						$conn->set_charset('utf8');
 						$debut = $_POST["Debut"];
 						$fin = $_POST["Fin"];
 						
@@ -51,7 +52,7 @@
 						$request = "SELECT created_at,email,nom,prenom,telephone,message FROM contact_form WHERE created_at BETWEEN date_format(".$date_debut.",'%Y-%m-%d') AND date_format(".$date_fin.",'%Y-%m-%d') ORDER BY created_at DESC ";
 						
 						$result = mysqli_query($conn,$request);
-						while ($row = $result -> fetch_array( MYSQL_NUM)) {
+						while ($row = $result -> fetch_array( MYSQLI_NUM)) {
 							printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[1].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
 							echo '</tr>';
 						}
@@ -63,10 +64,11 @@
 					else
 					{
 						$conn = OpenCon();
+						$conn->set_charset('utf8');
 						$request = "SELECT created_at,email,nom,prenom,telephone,message FROM contact_form ORDER BY created_at DESC ";
 						
 						$result = mysqli_query($conn,$request);
-						while ($row = $result -> fetch_array( MYSQL_NUM)) {
+						while ($row = $result -> fetch_array( MYSQLI_NUM)) {
 							printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[1].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
 							echo '</tr>';
 						}
