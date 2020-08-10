@@ -1,9 +1,10 @@
 <?php
 
 return array(
-    'host' => 'localhost',
+'host' => 'localhost',
     'username' => 'root',
-	'pswrd'=> 'LILY081196@t',
-	'db'=>'test'
+        'pswrd'=> '8(5nmLkjWsb24?:8',
+        'db'=>'oiqia_website'
+
 );
 ?>
