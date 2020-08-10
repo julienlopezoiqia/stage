@@ -1,0 +1,10 @@
+.table td,tr {
+	text-align: center;
+	
+}
+
+div.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+}
+
