@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+	include 'Serveur/interested.php';
+	
+?>
 <html lang="fr">
 	<head>
 		<title>Interested</title>
@@ -10,10 +14,37 @@
 	
 <body> 
 
-	<div><?php include('navbar.php'); ?></div>
+	<div><?php include('Component/navbar.php'); ?></div>
+	<div class ="container">
+	<br>
+	<br>
+		<table align="left">
+			<thead> 
+				<tr bgcolor="#C0C0C0">
+					<th width="350px">
+						<form method="GET" action="Serveur/SearchBar_interested.php ">
+							<input type="search" id="search"  name="search" placeholder="Recherche..." />
+							<input type="submit" value="Valider" />
+						</form>
+					</th>
+				
+					<th width="450px">
+					<form  method="post" action="interested.php"><?php include('Component/dates.php'); ?></form>
+					</th>
+				
+					<th width="350px">
+						<form align="right" action="interested.php" method="POST">
 	
-	<form  method="post" action="interested.php"><?php include('dates.php'); ?></form>
+							<input id="Refresh_Database" type="submit" class="btn btn-info" value="Refresh Database"/>
 	
+						</form>
+					</th>
+				</tr>
+			</thead> 
+		
+		</table>
+	</div>
+
 	
 	<div class ="container">
 	<br>
@@ -36,56 +67,20 @@
 			<tbody>
 				<?php
 					
-					include 'CoBdd.php';
-
-
-					if( isset($_POST["Debut"])and isset($_POST["Fin"])){
-						$conn = OpenCon();
-						$debut = $_POST["Debut"];
-						$fin = $_POST["Fin"];
-						
-						$date_debut = '\''.$debut.'\'';
-						$date_fin = '\''.$fin.'\'';
-						$request = "SELECT created_at,name,lastname,email,phone,agree FROM interested WHERE created_at BETWEEN date_format(".$date_debut.",'%Y-%m-%d') AND date_format(".$date_fin.",'%Y-%m-%d') ORDER BY created_at DESC ";
-						
-						$result = mysqli_query($conn,$request);
-
-						while ($row = $result-> fetch_array( MYSQLI_NUM)) {
-							if ($row[5]==1){
+					$interested = get_list_interested();
+					while ($row = $interested -> fetch_array( MYSQLI_NUM)) {
+						if ($row[5]==1){
 								$row[5]="Oui";
 							}
 							else{
 								$row[5]="Non";
 							}
-					
-							printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[1].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
-							echo '</tr>';
-						}
-
-
-						CloseCon($conn);
+						printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[1].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
+						echo '</tr>';
 					}
-					else
-					{
-						$conn = OpenCon();
-						$request = "SELECT created_at,name,lastname,email,phone,agree FROM interested ORDER BY created_at DESC ";
-						
-						$result = mysqli_query($conn,$request);
-
-						while ($row = $result-> fetch_array( MYSQLI_NUM)) {
-							if ($row[5]==1){
-								$row[5]="Oui";
-							}
-							else{
-								$row[5]="Non";
-							}
-					
-							printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[1].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
-							echo '</tr>';
-						}
-						CloseCon($conn);
-					}
-				?>
+				?>	
+				
+				
 			</tbody>
 		</table>
 	</div>

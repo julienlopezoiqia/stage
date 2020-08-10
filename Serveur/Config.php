@@ -1,5 +1,7 @@
 <?php
-$configs = include('../Serveur/db.config.php');
+//TODO : gerer la dépendaance proprement type require __DIR__ . '/vendor/autoload.php';
+
+$configs = include('db.config.php');
 
 //----------------------------------------------------------------------------------------
 
