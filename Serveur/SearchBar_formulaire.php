@@ -7,8 +7,8 @@
 		<title>Formulaire</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">	
-		<link href="../Client/css/bootstrap.css" rel="stylesheet">
-		<link href="../Client/css/style.css" rel="stylesheet">
+		<link href="../css/bootstrap.css" rel="stylesheet">
+		<link href="../css/style.css" rel="stylesheet">
 		
 	</head> 
 	
@@ -36,7 +36,7 @@
 					</th>
 				
 					<th width="350px">
-						<form  align="right" action="../Client/formulaire.php" method="POST">
+						<form align="right" action="../formulaire.php" method="POST">
 	
 							<input id="Refresh_Database" type="submit" class="btn btn-info" value="Refresh Database"/>
 	

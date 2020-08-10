@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . '/vendor/autoload.php';
 $configs = include('../Serveur/db.config.php');
 
 //----------------------------------------------------------------------------------------

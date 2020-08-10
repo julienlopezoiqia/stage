@@ -1,1 +1,2 @@
-config/db.config.php
+Server/db.config.php
+vendor

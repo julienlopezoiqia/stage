@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+	include 'Serveur/contact.php';
+?>
 <html lang="fr">
 	<head>
 		<title>Contacts</title>
@@ -10,11 +13,37 @@
 	</head> 
 <body> 
 
-	<div><?php include('navbar.php'); ?></div>
+	<div><?php include('Component/navbar.php'); ?></div>
 	
-	<form  method="post" action="index.php"><?php include('dates.php'); ?></form>
+	<div class ="container" align="left">
+	<br>
+	<br>
+		<table align="left">
+			<thead> 
+				<tr bgcolor="#C0C0C0">
+					<th width="350px">
+						<form method="GET" action="Serveur/SearchBar_contact.php ">
+							<input type="search" id="search"  name="search" placeholder="Recherche..." />
+							<input type="submit" value="Valider" />
+						</form>
+					</th>
+				
+					<th width="450px">
+					<form  method="post" action="index.php"><?php include('Component/dates.php'); ?></form>
+					</th>
+				
+					<th width="350px">
+						<form align="right" action="index.php" method="POST">
 	
+							<input id="Refresh_Database" type="submit" class="btn btn-info" value="Refresh Database"/>
 	
+						</form>
+					</th>
+				</tr>
+			</thead> 
+		
+		</table>
+	</div>
 	
 	<div class ="container">
 	<br>
@@ -36,49 +65,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				<?php
 				
-					include 'CoBdd.php';
-				
-					
-					if( isset($_POST["Debut"])and isset($_POST["Fin"])){
-						$conn = OpenCon();
-						$conn->set_charset('utf8');
-						$debut = $_POST["Debut"];
-						$fin = $_POST["Fin"];
-						
-						$date_debut = '\''.$debut.'\'';
-						$date_fin = '\''.$fin.'\'';
-						$request = "SELECT created_at,email,nom,prenom,telephone,message FROM contact_form WHERE created_at BETWEEN date_format(".$date_debut.",'%Y-%m-%d') AND date_format(".$date_fin.",'%Y-%m-%d') ORDER BY created_at DESC ";
-						
-						$result = mysqli_query($conn,$request);
-						while ($row = $result -> fetch_array( MYSQLI_NUM)) {
-							printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[1].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
-							echo '</tr>';
-						}
+			
+			
+			<?php
 
+					$contacts = get_contact();
+					while ($row = $contacts -> fetch_array( MYSQLI_NUM)) {
+						printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[1].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
+						echo '</tr>';
+					}
 
-						CloseCon($conn);
-					
-					}
-					else
-					{
-						$conn = OpenCon();
-						$conn->set_charset('utf8');
-						$request = "SELECT created_at,email,nom,prenom,telephone,message FROM contact_form ORDER BY created_at DESC ";
-						
-						$result = mysqli_query($conn,$request);
-						while ($row = $result -> fetch_array( MYSQLI_NUM)) {
-							printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[1].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
-							echo '</tr>';
-						}
-						CloseCon($conn);
-						
-					}
-					
-					
-					
-				?>
+			?>
 				
 			</tbody>
 		</table>
