@@ -32,7 +32,7 @@
 					</th>
 				
 					<th width="450px">
-					<form  method="post" action="formulaire.php"><?php include('dates.php'); ?></form>
+					<form  method="post" action="formulaire.php"><?php include('Component/dates.php'); ?></form>
 					</th>
 				
 					<th width="350px">
