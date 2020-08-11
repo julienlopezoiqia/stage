@@ -1,5 +1,5 @@
 <?php
-include('Config.php');
+include('DBManager.php');
 
 //----------------------------------------------------------------------------------------
 function get_Newsletter_List()
@@ -20,17 +20,15 @@ function get_Newsletter_List()
 function get_Newsletter_List_by_date($debut, $fin)
 	{
 		
-		//Si date début et fin renseignée	
-			//Connexion à la base de données
-			$conn = OpenCon();	
+    		//Si date début et fin renseignée
+
 						
 			$date_debut = '\''.$debut.'\'';
 			$date_fin = '\''.$fin.'\'';
 			$request = "SELECT created_at,email FROM newsletter WHERE created_at BETWEEN date_format(".$date_debut.",'%Y-%m-%d') AND date_format(".$date_fin.",'%Y-%m-%d') ORDER BY created_at DESC";
 						
-			$result = mysqli_query($conn,$request);
-			//fermeture de la connexion			
-			CloseCon($conn);
+			$result = getResults($request);
+
 			return $result;
 					
 		

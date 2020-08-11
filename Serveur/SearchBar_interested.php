@@ -82,12 +82,11 @@
 <?php
 function SearchBar_interested()
 	{
-		$conn = OpenCon();
 		if(isset($_GET['search']) ? '%'.$_GET['search'].'%' : '')
 		{
 			$search = htmlspecialchars($_GET['search']);
 			$request = "SELECT * FROM interested where created_at like '%$search%'  OR name like '%$search%' OR lastname like '%$search%'  OR email like '%$search%' OR phone like '%$search%' OR agree like '%$search%' ORDER BY created_at DESC";
-			$result = mysqli_query($conn,$request);
+			$result = getResults($request);
 			$queryResult= mysqli_num_rows($result);
 			if ($queryResult>0){
 	
@@ -110,9 +109,6 @@ function SearchBar_interested()
 					</br>-Si vous effectuez une recherche sur les demandes acceptées, il faudra écrire '1' pour trouver celles accéptées et '0' pour celles refusées.";
 			}
 		}
-		
-	
-	CloseCon($conn);	
-}
+	}
 
 ?>

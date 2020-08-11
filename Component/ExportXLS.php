@@ -1,7 +1,7 @@
 <?php
 //TODO: importer correctement / composer
 	include '../vendor/phpoffice/phpexcel/Classes/PHPExcel.php';
-	include '../Serveur/Config.php';
+	include '../Serveur/DBManager.php';
 
 	$conn = OpenCon();
 	

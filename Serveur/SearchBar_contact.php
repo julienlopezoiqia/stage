@@ -88,12 +88,12 @@
 <?php
 function SearchBar_contact()
 	{
-		$conn = OpenCon();
+
 		if(isset($_GET['search']) ? '%'.$_GET['search'].'%' : '')
 		{
 			$search = htmlspecialchars($_GET['search']);
 			$request = "SELECT * FROM contact_form where created_at like '%$search%'  OR nom like '%$search%' OR prenom like '%$search%'  OR email like '%$search%' OR telephone like '%$search%' OR message like '%$search%' ORDER BY created_at DESC";
-			$result = mysqli_query($conn,$request);
+			$result = getResults($request);
 			$queryResult= mysqli_num_rows($result);
 			if ($queryResult>0){
 	
@@ -112,8 +112,7 @@ function SearchBar_contact()
 			}
 		}
 		
-	
-	CloseCon($conn);	
+
 }
 
 ?>

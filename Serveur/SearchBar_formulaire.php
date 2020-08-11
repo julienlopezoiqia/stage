@@ -117,7 +117,6 @@
 <?php
 function SearchBar_formulaire()
 	{
-		$conn = OpenCon();
 		if(isset($_GET['search']) ? '%'.$_GET['search'].'%' : '')
 		{
 			$search = htmlspecialchars($_GET['search']);
@@ -126,7 +125,7 @@ function SearchBar_formulaire()
 						OR climatisation like '%$search%' OR access like '%$search%' OR porte like '%$search%' OR type_location like '%$search%' OR type_connexion like '%$search%' OR parking like '%$search%' 
 						OR nuit_par_an like '%$search%' OR nombre_couchage like '%$search%' OR duree_moyenne like '%$search%' OR chiffre_affaire like '%$search%' OR created_at like '%$search%' OR actutarif like '%$search%'
 						ORDER BY created_at DESC";
-			$result = mysqli_query($conn,$request);
+			$result = getResults($request);
 			$queryResult= mysqli_num_rows($result);
 			if ($queryResult>0){
 	
@@ -166,8 +165,7 @@ function SearchBar_formulaire()
 			}
 		}
 		
-	
-	CloseCon($conn);	
+
 }
 
 ?>

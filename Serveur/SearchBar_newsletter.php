@@ -65,8 +65,7 @@
 					return $SearchBar;
 					
 				?>	
-				
-				
+
 			</tbody>
 		</table>
 	</div>
@@ -76,12 +75,11 @@
 <?php
 function SearchBar_newsletter()
 	{
-		$conn = OpenCon();
 		if(isset($_GET['search']) ? '%'.$_GET['search'].'%' : '')
 		{
 			$search = htmlspecialchars($_GET['search']);
 			$request = "SELECT * FROM newsletter where created_at like '%$search%'  OR email like '%$search%' ORDER BY created_at DESC";
-			$result = mysqli_query($conn,$request);
+			$result = getResults($request);
 			$queryResult= mysqli_num_rows($result);
 			if ($queryResult>0){
 	
@@ -100,8 +98,6 @@ function SearchBar_newsletter()
 			}
 		}
 		
-	
-	CloseCon($conn);	
-}
+	}
 
 ?>
