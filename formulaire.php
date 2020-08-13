@@ -13,7 +13,7 @@
 	</head> 
 	
 	
-<body> 
+<body id ="formulaire"> 
 	
 	
 	<div><?php include('Component/navbar.php'); ?></div>
@@ -25,7 +25,7 @@
 			<thead> 
 				<tr bgcolor="#C0C0C0">
 					<th width="350px">
-						<form method="GET" action="Serveur/SearchBar_formulaire.php ">
+						<form method="GET" action="formulaire.php ">
 							<input type="search" id="search"  name="search" placeholder="Recherche..." />
 							<input type="submit" value="Valider" />
 						</form>
@@ -94,30 +94,7 @@
 			<tbody>
 				<?php
 					$form = get_Formulaire_data();
-					while ($row = $form -> fetch_array( MYSQLI_NUM)) {
-							if ($row[13]==1)
-							{
-								
-								$row[13]="Oui";
-						
-							}
-							else{
-								
-								$row[13]="Non";
-						
-							}
-							if ($row[18]==1){
-								
-								$row[18]="Oui";
-							}
-							else{
-						
-								$row[18]="Non";
-							}
-							printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[1].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td><td>'. $row[6].'</td><td>'. $row[7].'</td><td>'. $row[8].'</td><td>'. $row[9].'</td><td>'. $row[10].'</td><td>'. $row[11].'</td><td>'. $row[12].'</td><td>'. $row[13].'</td><td>'. $row[14].'</td><td>'. $row[15].'</td><td>'. $row[16].'</td><td>'. $row[17].'</td><td>'. $row[18].'</td><td>'. $row[19].'</td><td>'. $row[20].'</td><td>'. $row[21].'</td><td>'. $row[22].'</td><td>'. $row[23].'</td><td>'. $row[24].'</td>');
-							echo '</tr>';
-					
-					}
+					return $form;
 					
 					
 				?>
