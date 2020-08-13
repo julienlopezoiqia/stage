@@ -11,7 +11,7 @@
 		<link href="css/style.css" rel="stylesheet">
 		
 	</head> 
-<body> 
+<body id ="contact"> 
 
 	<div><?php include('Component/navbar.php'); ?></div>
 	
@@ -22,17 +22,26 @@
 			<thead> 
 				<tr bgcolor="#C0C0C0">
 					<th width="350px">
-						<form method="GET" action="Serveur/SearchBar_contact.php ">
+						<form method="GET" action="index.php ">
 							<input type="search" id="search"  name="search" placeholder="Recherche..." />
 							<input type="submit" value="Valider" />
 						</form>
 					</th>
 				
-					<th width="450px">
+					<th width="650px">
 					<form  method="post" action="index.php"><?php include('Component/dates.php'); ?></form>
 					</th>
 				
-					<th width="350px">
+					<th width="250px">
+						<form align="right" action="Serveur/Contact_ExportXLS.php" method="POST">
+		
+							<input id="create_excel" type="submit" class="btn btn-info" value="Export to Excel"/>
+		
+						</form>	
+					</th>
+	
+				
+					<th width="250px">
 						<form align="right" action="index.php" method="POST">
 	
 							<input id="Refresh_Database" type="submit" class="btn btn-info" value="Refresh Database"/>
@@ -71,10 +80,7 @@
 			<?php
 
 					$contacts = get_contact();
-					while ($row = $contacts -> fetch_array( MYSQLI_NUM)) {
-						printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[1].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
-						echo '</tr>';
-					}
+					return $contacts;
 
 			?>
 				

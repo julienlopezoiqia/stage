@@ -13,7 +13,7 @@
 	</head> 
 	
 	
-<body> 
+<body id ="newsletter"> 
 
 	<div><?php include('Component/navbar.php'); ?></div>
 
@@ -25,7 +25,7 @@
 			<thead> 
 				<tr bgcolor="#C0C0C0">
 					<th width="350px">
-						<form method="GET" action="Serveur/SearchBar_newsletter.php ">
+						<form method="GET" action="newsletter.php ">
 							<input type="search" id="search"  name="search" placeholder="Recherche..." />
 							<input type="submit" value="Valider" />
 						</form>
@@ -36,7 +36,7 @@
 					</th>
 					
 					<th width="250px">
-						<form align="right" action="Component/ExportXLS.php" method="POST">
+						<form align="right" action="Serveur/Newsletter_ExportXLS.php" method="POST">
 		
 							<input id="create_excel" type="submit" class="btn btn-info" value="Export to Excel"/>
 		
@@ -73,10 +73,7 @@
 				<?php
 				
 					$Newsletter = get_Newsletter_List();
-					while ($row = $Newsletter -> fetch_array( MYSQLI_NUM)) {
-						printf('<tr bgcolor="#C0C0C0"><td>' .$row[0].'</td><td>'. $row[1].'</td>');
-							echo '</tr>';
-					}
+					return $Newsletter;
 
 					
 						

@@ -12,7 +12,7 @@
 		<link href="css/style.css" rel="stylesheet">
 	</head> 
 	
-<body> 
+<body id ="interested"> 
 
 	<div><?php include('Component/navbar.php'); ?></div>
 	<div class ="container">
@@ -22,17 +22,27 @@
 			<thead> 
 				<tr bgcolor="#C0C0C0">
 					<th width="350px">
-						<form method="GET" action="Serveur/SearchBar_interested.php ">
+						<form method="GET" action="interested.php ">
 							<input type="search" id="search"  name="search" placeholder="Recherche..." />
 							<input type="submit" value="Valider" />
 						</form>
 					</th>
 				
-					<th width="450px">
+					<th width="650px">
 					<form  method="post" action="interested.php"><?php include('Component/dates.php'); ?></form>
 					</th>
-				
-					<th width="350px">
+					
+					
+					<th width="250px">
+						<form align="right" action="Serveur/Interested_ExportXLS.php" method="POST">
+		
+							<input id="create_excel" type="submit" class="btn btn-info" value="Export to Excel"/>
+		
+						</form>	
+					</th>
+					
+					
+					<th width="250px">
 						<form align="right" action="interested.php" method="POST">
 	
 							<input id="Refresh_Database" type="submit" class="btn btn-info" value="Refresh Database"/>
@@ -68,16 +78,7 @@
 				<?php
 					
 					$interested = get_list_interested();
-					while ($row = $interested -> fetch_array( MYSQLI_NUM)) {
-						if ($row[5]==1){
-								$row[5]="Oui";
-							}
-							else{
-								$row[5]="Non";
-							}
-						printf('<tr bgcolor="#C0C0C0"><td>'.$row[0].'</td><td>'. $row[1].'</td><td>'. $row[2].'</td><td>'. $row[3].'</td><td>'. $row[4].'</td><td>'. $row[5].'</td>');
-						echo '</tr>';
-					}
+					return $interested;
 				?>	
 				
 				
