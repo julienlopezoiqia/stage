@@ -7,7 +7,7 @@
 	
 	
 	
-	$request = "SELECT created_at,email,nom,prenom,telephone,message FROM contact_form ORDER BY created_at DESC ";
+	$request = "SELECT created_at,nom,prenom,email,telephone,message FROM contact_form ORDER BY created_at DESC ";
 	$result =getResults($request);
 	
 	function exportXLS($result){
