@@ -1,0 +1,13 @@
+
+
+//Code de création de la table relance.
+
+CREATE TABLE `relance` (
+	`email` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`Relance_number` INT(11) NOT NULL,
+	`Relance_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`email`, `Relance_number`) USING BTREE
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
