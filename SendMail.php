@@ -37,7 +37,7 @@ include('/Serveur/SendMail.php');
 			</thead>
 		</table>
 		
-		<form  action="form.php" method="POST">
+		<form  action="Relance.php" method="POST">
 		
 			<input id="send" type="submit" class="btn btn-info" value="Envoyer"/>
 		
