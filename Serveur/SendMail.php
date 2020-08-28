@@ -1,3 +1,5 @@
+
+
 <?php
 include('DBManager.php');
 $jours= include('jours.config.php');
@@ -18,24 +20,6 @@ function get_Email_List($nb_jours){
 		return $emails;
 		
 }
-
-//----------------------------------------------------------------------------------------
-
-function Send_Email($Email){
-	
-	
-	$sujet = "Email de test";
-	$corp = "Salut ceci est un email de test envoyer par un script PHP";
-	$headers = "From: email_de_l'entreprise@oiqia.com";
-	if (mail($Email, $sujet, $corp, $headers)) {
-		
-		echo "<br>Email envoyé avec succès à $Email " ;
-	} else {
-		echo "<br>echec d'envoi à $Email";
-	}
-}
-/*$get=get_Email_List(8);
-print_r(array_values($get));*/
 
 
 //----------------------------------------------------------------------------------------
@@ -59,29 +43,30 @@ function get_Emails_List(){
 }
 //----------------------------------------------------------------------------------------
 
+function relanceNum($email){
+	$_email = '\''.$email.'\'';
+	$request="SELECT MAX(Relance_number) FROM relance WHERE email=".$_email;
+	$result= getResults($request);
+	while ($row = $result -> fetch_array( MYSQLI_NUM)){	
+			return $row[0];	
+		}
+	
+	
+}
 
-function insert_relance($email,$relanceNum){
+
+//----------------------------------------------------------------------------------------
+
+function insert_relance($email){
 		$_email = '\''.$email.'\'';
-		$request="INSERT INTO relance (email,Relance_number,Relance_date) VALUES(".$_email.",".$relanceNum.",now())";
+		$relance_number = relanceNum($email)+1;
+		
+		$request="INSERT INTO relance (email,Relance_number,Relance_date) VALUES(".$_email.",".$relance_number.",now())";
+		
 		insertData($request);
 		
 	}
-	
-	
-//----------------------------------------------------------------------------------------
 
-/*function commit($conn){
-	
-	if (mysqli_commit($conn)){
-		echo "Commit transaction ok";
-		
-	}
-	else{
-		echo "ko"; 
-	}
-	
-	CloseCon($conn);
-}*/
 
 //------------------------insert data in bdd----------------------------------------------
 
@@ -98,9 +83,7 @@ function insertData($request)
 	else{
 		printf("erreur");
 	}
-	
-   
-   
+
 }
 
 	
